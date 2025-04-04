@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import connectDatabase from './config/db.js';
 
 // Import route handlers
 import productRoutes from './routes/productRoutes.js';
@@ -23,15 +24,7 @@ app.use(cors());
  * Database Connection
  * Establishes connection to MongoDB using environment variables
  */
-const connectDatabase = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('✅ MongoDB Connected Successfully');
-  } catch (error) {
-    console.error('❌ MongoDB Connection Error:', error.message);
-    process.exit(1);
-  }
-};
+
 
 /**
  * API Routes Configuration
@@ -69,18 +62,7 @@ const startServer = async () => {
       console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
     });
 
-    // Handle server errors
-    server.on('error', (error) => {
-      if (error.code === 'EADDRINUSE') {
-        console.log(`⚠️ Port ${PORT} is busy, trying ${PORT + 1}...`);
-        server.close();
-        app.listen(PORT + 1, () => {
-          console.log(`✅ Server is running on port ${PORT + 1}`);
-        });
-      } else {
-        console.error('❌ Server Error:', error);
-      }
-    });
+  
 
   } catch (error) {
     console.error('❌ Failed to start server:', error);
