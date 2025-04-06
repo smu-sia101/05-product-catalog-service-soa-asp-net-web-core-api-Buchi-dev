@@ -55,9 +55,11 @@ const startServer = async () => {
   
   try {
     // Connect to database before starting server
+   
     await connectDatabase();
-
+    // Start the server
     const server = app.listen(PORT, () => {
+      
       console.log(`✅ Server is running on port ${PORT}`);
       console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
     });

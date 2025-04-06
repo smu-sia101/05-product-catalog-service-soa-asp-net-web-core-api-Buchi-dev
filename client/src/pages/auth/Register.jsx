@@ -23,10 +23,28 @@ const Register = () => {
         navigate('/dashboard');
       }, 1000);
     } catch (error) {
+      console.error('Registration error:', error);
+      
+      // Get more specific error message from the response if available
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data?.error || 
+                          'Registration failed. Please try again.';
+      
       setStatus({ 
         type: 'error', 
-        message: error.response?.data?.message || 'Registration failed. Please try again.' 
+        message: errorMessage
       });
+      
+      // Display more user-friendly messages based on common errors
+      if (errorMessage.includes('already exists')) {
+        message.error('This email is already registered. Please use a different email or try logging in.');
+      } else if (errorMessage.includes('valid email')) {
+        message.error('Please enter a valid email address.');
+      } else if (errorMessage.includes('password')) {
+        message.error('Password must be at least 6 characters long.');
+      } else {
+        message.error('Registration failed. Please check your information and try again.');
+      }
     } finally {
       setLoading(false);
     }

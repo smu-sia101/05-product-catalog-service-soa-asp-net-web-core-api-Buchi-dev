@@ -55,15 +55,31 @@ export const AuthProvider = ({ children }) => {
 
   // Register new user
   const register = async (username, email, password) => {
-    const response = await axios.post('http://localhost:5000/api/auth/register', {
-      name: username,
-      email,
-      password,
-    });
-    
-    localStorage.setItem('token', response.data.token);
-    setUser(response.data);
-    return response.data;
+    try {
+      console.log('Attempting to register with:', { username, email, password: '***hidden***' });
+      
+      if (!username || !email || !password) {
+        throw new Error('All fields are required');
+      }
+      
+      if (password.length < 6) {
+        throw new Error('Password must be at least 6 characters');
+      }
+      
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
+        name: username,
+        email,
+        password,
+      });
+      
+      localStorage.setItem('token', response.data.token);
+      setUser(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Registration failed:', error);
+      // Re-throw the error for the component to handle
+      throw error;
+    }
   };
 
   // Update user profile
