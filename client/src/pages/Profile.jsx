@@ -28,13 +28,9 @@ const Profile = () => {
       setLoading(true);
       setProfileStatus({ type: 'info', message: 'Updating your profile...' });
       
-      const token = localStorage.getItem('token');
       const response = await axios.put(
         'http://localhost:5000/api/auth/update-details',
-        values,
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
+        values
       );
 
       if (response.data) {
@@ -59,15 +55,11 @@ const Profile = () => {
       setLoading(true);
       setPasswordStatus({ type: 'info', message: 'Updating your password...' });
       
-      const token = localStorage.getItem('token');
       await axios.put(
         'http://localhost:5000/api/auth/update-password', 
         {
           currentPassword: values.currentPassword,
           newPassword: values.newPassword
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
         }
       );
 

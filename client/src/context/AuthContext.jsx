@@ -14,8 +14,9 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in when the app starts
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    // Use a local storage flag to check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
       loadUser();
     } else {
       setLoading(false);
@@ -25,16 +26,13 @@ export const AuthProvider = ({ children }) => {
   // Get user data from the server
   const loadUser = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/auth/me', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axios.get('http://localhost:5000/api/auth/me');
       if (response.data) {
         setUser(response.data);
       }
     } catch {
-      // If there's an error, clear the token and user data
-      localStorage.removeItem('token');
+      // If there's an error, clear the login state
+      localStorage.removeItem('isLoggedIn');
       setUser(null);
     } finally {
       setLoading(false);
@@ -48,8 +46,9 @@ export const AuthProvider = ({ children }) => {
       password,
     });
     
-    localStorage.setItem('token', response.data.token);
-    setUser(response.data);
+    // Store login status in local storage
+    localStorage.setItem('isLoggedIn', 'true');
+    setUser(response.data.user);
     return response.data;
   };
 
@@ -72,8 +71,9 @@ export const AuthProvider = ({ children }) => {
         password,
       });
       
-      localStorage.setItem('token', response.data.token);
-      setUser(response.data);
+      // Store login status in local storage
+      localStorage.setItem('isLoggedIn', 'true');
+      setUser(response.data.user);
       return response.data;
     } catch (error) {
       console.error('Registration failed:', error);
@@ -84,13 +84,9 @@ export const AuthProvider = ({ children }) => {
 
   // Update user profile
   const updateUser = async (userData) => {
-    const token = localStorage.getItem('token');
     const response = await axios.put(
       'http://localhost:5000/api/auth/update-details',
-      userData,
-      {
-        headers: { Authorization: `Bearer ${token}` }
-      }
+      userData
     );
     setUser(response.data);
     return response.data;
@@ -98,7 +94,7 @@ export const AuthProvider = ({ children }) => {
 
   // Logout user
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
     setUser(null);
   };
 

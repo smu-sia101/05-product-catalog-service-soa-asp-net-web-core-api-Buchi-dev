@@ -20,7 +20,15 @@ export const register = async (req, res) => {
       password
     });
 
-    sendTokenResponse(user, 201, res);
+    res.status(201).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (error) {
     res.status(400).json({ message: 'Error registering user', error: error.message });
   }
@@ -50,7 +58,15 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    sendTokenResponse(user, 200, res);
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (error) {
     res.status(400).json({ message: 'Error logging in', error: error.message });
   }
@@ -100,7 +116,15 @@ export const updatePassword = async (req, res) => {
     user.password = req.body.newPassword;
     await user.save();
 
-    sendTokenResponse(user, 200, res);
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (error) {
     res.status(400).json({ message: 'Error updating password', error: error.message });
   }
@@ -149,21 +173,4 @@ export const resetPassword = async (req, res) => {
       error: error.message 
     });
   }
-};
-
-// Helper function to get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
-  // Create token
-  const token = user.getSignedJwtToken();
-
-  res.status(statusCode).json({
-    success: true,
-    token,
-    user: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role
-    }
-  });
 }; 

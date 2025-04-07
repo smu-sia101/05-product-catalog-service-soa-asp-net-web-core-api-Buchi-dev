@@ -1,7 +1,6 @@
 // Import required dependencies
 import 'dotenv/config';
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import connectDatabase from './config/db.js';
 
@@ -51,7 +50,7 @@ app.use((err, req, res, next) => {
  * Initializes the server and handles port conflicts
  */
 const startServer = async () => {
-  const PORT = process.env.PORT || 5000;
+  const PORT = 5000;
   
   try {
     // Connect to database before starting server
