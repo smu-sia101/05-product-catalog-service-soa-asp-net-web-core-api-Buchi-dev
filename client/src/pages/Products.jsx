@@ -90,6 +90,11 @@ const Products = () => {
       ellipsis: true,
     },
     {
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+    },
+    {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
@@ -179,6 +184,14 @@ const Products = () => {
             rules={[{ required: true, message: 'Please enter product description' }]}
           >
             <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item
+            name="category"
+            label="Category"
+            rules={[{ required: true, message: 'Please enter product category' }]}
+          >
+            <Input />
           </Form.Item>
 
           <Form.Item
