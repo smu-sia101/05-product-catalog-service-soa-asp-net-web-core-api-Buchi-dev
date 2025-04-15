@@ -28,12 +28,6 @@ This is the backend server for the Product Catalog Service, a RESTful API built 
    ```
    npm install
    ```
-4. Create a `.env` file in the root directory with the following variables:
-   ```
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   NODE_ENV=development
-   ```
 
 ## Running the Server
 
