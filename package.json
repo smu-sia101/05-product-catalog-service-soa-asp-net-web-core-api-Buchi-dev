@@ -1,0 +1,26 @@
+{
+  "name": "05-product-catalog-service-soa-asp-net-web-core-api-buchi-dev",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smu-sia101/05-product-catalog-service-soa-asp-net-web-core-api-Buchi-dev.git"
+  },
+  "keywords": [],
+  "author": "Yuzon, Tristan Justine M.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smu-sia101/05-product-catalog-service-soa-asp-net-web-core-api-Buchi-dev/issues"
+  },
+  "homepage": "https://github.com/smu-sia101/05-product-catalog-service-soa-asp-net-web-core-api-Buchi-dev#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

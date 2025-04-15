@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/vWeu2Z3_)
 # 📌 ProductCatalog Service Instructions
 
 ## 📚 Overview
@@ -58,8 +59,83 @@ Create a **frontend application** using any framework of your choice (**React, A
 ---
 
 ## 🔹 Additional Notes
-- The API uses **MongoDB** for storage instead of SQL databases.  
+- The API uses **MongoDB** for storage instead of SQL databases(mongodb://localhost:27017/).  
 - The API follows **RESTful principles**.  
 - Responses are returned in **JSON format**.  
+
+---
+
+# Product Catalog Service - Full Stack Application
+
+This is a full-stack application for managing a product catalog, built with a React frontend and Express.js backend.
+
+## Project Structure
+
+The project is organized into two main folders:
+
+- **client/** - React frontend built with Vite and Ant Design
+- **server/** - Express.js backend with MongoDB
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- MongoDB (local or remote)
+- npm or yarn package manager
+
+### Setting Up Backend
+
+1. Navigate to the server directory:
+   ```
+   cd server
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+
+4. Start the server:
+   ```
+   npm run dev
+   ```
+   
+   The server will run on http://localhost:5000
+
+### Setting Up Frontend
+
+1. Navigate to the client directory:
+   ```
+   cd client
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+   
+   The client will run on http://localhost:5173
+
+## Features
+
+- User authentication and authorization
+- Product catalog management with CRUD operations
+- Responsive UI with Ant Design
+- REST API with Express.js
+- MongoDB database for data persistence
+
+## Development
+
+For detailed information about each part of the application:
+
+- See [client/README.md](./client/README.md) for frontend details
+- See [server/README.md](./server/README.md) for backend details
 
 ---
